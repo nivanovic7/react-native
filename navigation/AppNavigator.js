@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 function AppNavigator() {
   const { isLoggedIn } = useSelector((state) => state.auth);
-
+  if (isLoggedIn) alert("logged in");
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
