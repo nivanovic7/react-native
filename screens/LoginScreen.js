@@ -7,8 +7,8 @@ import { logIn } from "../redux/authSlice";
 const API_URL = "https://laterz.api.exebyte.io/api/auth/login";
 
 function LoginScreen() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("Password1!");
+  const [email, setEmail] = useState("test@yahoo.com");
   const dispatch = useDispatch();
   function handleLogin() {
     if (!password || !email) {
