@@ -5,26 +5,41 @@ import LoginScreen from "../screens/LoginScreen";
 import { useSelector } from "react-redux";
 import Inbox from "../screens/Inbox";
 import Profile from "../screens/Profile";
+import { StatusBar, StyleSheet, View } from "react-native";
 
 function AppNavigator() {
   const { isLoggedIn } = useSelector((state) => state.auth);
-  if (isLoggedIn) alert("logged in");
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {isLoggedIn ? (
-          <>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Inbox" component={Inbox} />
-            <Stack.Screen name="Profile" component={Profile} />
-          </>
-        ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.contrainer}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {isLoggedIn ? (
+            <>
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="Home"
+                component={HomeScreen}
+              />
+              <Stack.Screen name="Inbox" component={Inbox} />
+              <Stack.Screen name="Profile" component={Profile} />
+            </>
+          ) : (
+            <Stack.Screen name="Login" component={LoginScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
 
 export default AppNavigator;
+
+const styles = StyleSheet.create({
+  contrainer: {
+    flex: 1,
+    padding: 8,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: "red",
+  },
+});
