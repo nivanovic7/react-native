@@ -27,7 +27,6 @@ function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Login here</Text>
       <TextInput
         style={styles.textInput}
         value={email}
