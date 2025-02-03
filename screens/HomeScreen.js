@@ -15,20 +15,11 @@ import { logOut } from "../redux/authSlice";
 import { useGetOutfitsQuery } from "../redux/outfitsApi";
 
 export default function HomeScreen() {
-  const { accessToken } = useSelector((state) => state.auth);
-  //   const [isLoading, setIsLoading] = useState(false);
-  //   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
   const { data: outfits, isLoading } = useGetOutfitsQuery();
 
   function handleLogout() {
     dispatch(logOut());
-  }
-
-  if (outfits) {
-    console.log(outfits);
-  } else {
-    console.log("SFGSDGSDFGSDFGSDFSDFG");
   }
 
   return (
@@ -45,7 +36,9 @@ export default function HomeScreen() {
               <Text style={styles.item}>{item.outfitDescription}</Text>
               <Image
                 style={{ flex: 1, width: 100, height: 100 }}
-                source={{ uri: `${item.outfitImages[0].imageMediumSource}` }}
+                source={{
+                  uri: `${item.outfitImages[0].imageMediumSource}` || "fal",
+                }}
               />
             </>
           )}
