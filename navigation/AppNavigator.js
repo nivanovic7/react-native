@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { useSelector } from "react-redux";
-import Inbox from "../screens/Inbox";
-import Profile from "../screens/Profile";
+import InboxScreen from "../screens/InboxScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import { StatusBar, StyleSheet, View } from "react-native";
 
 function AppNavigator() {
@@ -21,8 +21,8 @@ function AppNavigator() {
                 name="Home"
                 component={HomeScreen}
               />
-              <Stack.Screen name="Inbox" component={Inbox} />
-              <Stack.Screen name="Profile" component={Profile} />
+              <Stack.Screen name="InboxScreen" component={InboxScreen} />
+              <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
             </>
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />

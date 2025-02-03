@@ -3,18 +3,19 @@ import { Button, Text, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { logOut } from "../redux/authSlice";
 
-function Feed() {
+function FeedScreen() {
   const dispatch = useDispatch();
   function handleLogout() {
     dispatch(logOut());
   }
   return (
     <View>
-      <Link screen="Inbox">Go to Inbox</Link>
-      <Link screen="Profile">Profile</Link>
+      <View></View>
+      <Link screen="InboxScreen">Go to Inbox</Link>
+      <Link screen="ProfileScreen">Profile</Link>
       <Button onPress={handleLogout} title="Logout" />
     </View>
   );
 }
 
-export default Feed;
+export default FeedScreen;

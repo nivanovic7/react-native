@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-function NewPost() {
+function NewPostScreen() {
   return (
     <View>
       <Text>Add new</Text>
@@ -8,4 +8,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default NewPostScreen;

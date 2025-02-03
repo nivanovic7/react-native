@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
 
-function Inbox() {
+function ProfileScreen() {
   return (
     <View>
-      <Text>inbox</Text>
+      <Text>Profiel</Text>
     </View>
   );
 }
 
-export default Inbox;
+export default ProfileScreen;

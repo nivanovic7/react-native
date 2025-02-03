@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
 
-function Search() {
+function InboxScreen() {
   return (
     <View>
-      <Text>SEARCH</Text>
+      <Text>inboxScreen</Text>
     </View>
   );
 }
 
-export default Search;
+export default InboxScreen;
