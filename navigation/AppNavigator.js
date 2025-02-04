@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: "red",
+    backgroundColor: "whitesmoke",
   },
 });

@@ -17,7 +17,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useGetOutfitsQuery } from "../redux/outfitsApi";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FeedScreen from "./FeedScreen";
 import SearchScreen from "./SearchScreen";
@@ -29,7 +28,6 @@ const Tab = createBottomTabNavigator();
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
-  const { data: outfits, isLoading } = useGetOutfitsQuery();
 
   return (
     <Tab.Navigator
@@ -97,28 +95,6 @@ export default function HomeScreen() {
       <Tab.Screen name="ReelsScreen" component={ReelsScreen} />
       <Tab.Screen name="NotificationsScreen" component={NotificationsScreen} />
     </Tab.Navigator>
-    // <View style={styles.container}>
-    //   <Text>Home Screen</Text>
-
-    //   {isLoading && <ActivityIndicator size="large" />}
-    //   {outfits?.data && (
-    //     <FlatList
-    //       data={outfits.data}
-    //       renderItem={({ item }) => (
-    //         <>
-    //           <Text style={styles.item}>{item.outfitDescription}</Text>
-    //           <Image
-    //             style={{ flex: 1, width: 100, height: 100 }}
-    //             source={{
-    //               uri: `${item.outfitImages[0].imageMediumSource}` || "fal",
-    //             }}
-    //           />
-    //         </>
-    //       )}
-    //       keyExtractor={(item) => item._id}
-    //     />
-    //   )}
-    // </View>
   );
 }
 

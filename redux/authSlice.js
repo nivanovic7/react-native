@@ -5,6 +5,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   user: null,
+  userProfileImg: null,
 };
 
 const authSlice = createSlice({
@@ -16,7 +17,8 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
       state.user = action.payload.user;
-      console.log(action.payload.user);
+      state.userProfileImg = action.payload.userProfileImage;
+      console.log(action.payload.userProfileImage);
     },
     logOut: (state) => {
       state.isLoggedIn = false;
