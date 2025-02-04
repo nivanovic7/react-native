@@ -1,19 +1,20 @@
-import { Link } from "@react-navigation/native";
-import { Button, StyleSheet, View } from "react-native";
-import { useDispatch } from "react-redux";
-import { logOut } from "../redux/authSlice";
+import { StyleSheet, View } from "react-native";
 import FeedHeader from "../components/FeedHeader";
+import Outfits from "../components/Outfits";
 
 function FeedScreen() {
-  const dispatch = useDispatch();
-
   return (
-    <View>
+    <View style={styles.container}>
       <FeedHeader />
-      <Button onPress={() => dispatch(logOut())} title="LOGOUT" />
-      <Link screen="InboxScreen">Go to Inbox</Link>
+      <Outfits />
     </View>
   );
 }
 
 export default FeedScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 16,
+  },
+});

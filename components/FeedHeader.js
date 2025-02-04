@@ -3,6 +3,7 @@ import { Link } from "@react-navigation/native";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import ProfileScreen from "../screens/ProfileScreen";
+import InboxScreen from "../screens/InboxScreen";
 
 function FeedHeader() {
   const { user, userProfileImg } = useSelector((state) => state.auth);
@@ -16,7 +17,9 @@ function FeedHeader() {
         />
       </Link>
       <Text style={styles.userName}>{user.userName}</Text>
-      <FontAwesome name="envelope-o" size={20} color="black" />
+      <Link screen={InboxScreen}>
+        <FontAwesome name="envelope-o" size={20} color="black" />
+      </Link>
     </View>
   );
 }
@@ -30,8 +33,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 100,
   },
   userName: {
