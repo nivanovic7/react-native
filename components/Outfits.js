@@ -10,19 +10,16 @@ import { useGetOutfitsQuery } from "../redux/outfitsApi";
 import Outfit from "./Outfit";
 
 function Outfits() {
-  const {
-    data: { data },
-    isLoading,
-  } = useGetOutfitsQuery();
+  const { data, isLoading, error } = useGetOutfitsQuery();
 
-  if (data) data.map((item) => console.log(item));
+  if (error) return <Text>Error ocured, try again later!</Text>;
 
   return isLoading ? (
     <ActivityIndicator size="small" />
   ) : (
     <FlatList
       contentContainerStyle={styles.container}
-      data={data}
+      data={data.data}
       keyExtractor={(item) => item._id}
       renderItem={({ item }) => <Outfit outfit={item} />}
     />

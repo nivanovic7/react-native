@@ -38,7 +38,6 @@ export default AppNavigator;
 const styles = StyleSheet.create({
   contrainer: {
     flex: 1,
-    padding: 12,
     paddingTop: StatusBar.currentHeight + 10,
     backgroundColor: "whitesmoke",
   },
