@@ -1,15 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-  ScrollView,
-  FlatList,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
