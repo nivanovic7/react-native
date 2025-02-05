@@ -8,7 +8,6 @@ import ImageSlider from "./ImageSlider";
 import { useSelector } from "react-redux";
 
 function Outfit({ outfit }) {
-  console.log(outfit.outfitPostComment.length);
   const { imageSmallSource } = useSelector(
     (state) => state.auth.userProfileImg
   );
