@@ -24,7 +24,7 @@ function InboxScreen() {
   return (
     <View>
       <FlatList
-        data={data.data}
+        data={data.data.filter((chat) => chat.chatMembers.length > 1)}
         renderItem={({ item }) => {
           return (
             <View style={styles.container}>
@@ -65,7 +65,11 @@ function InboxScreen() {
 
                 <View style={{ width: width - 20 }}>
                   <Text>
-                    {item.chatMembers.map((member) => member.name).join(", ")}
+                    {console.log(item)}
+                    {item.chatMembers
+                      .filter((member) => member._id !== item.user._id)
+                      .map((member) => member.name)
+                      .join(", ")}
                   </Text>
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -75,7 +79,7 @@ function InboxScreen() {
                       justifyContent: "center",
                     }}
                   >
-                    <Text style={{ textAlign: "center" }}>Delete</Text>
+                    <Text style={{ textAlign: "center" }}>Mute</Text>
                   </Pressable>
                   <Pressable
                     style={{
@@ -83,7 +87,7 @@ function InboxScreen() {
                       width: (width - 20) / 2,
                     }}
                   >
-                    <Text style={{ textAlign: "center" }}>Mute</Text>
+                    <Text style={{ textAlign: "center" }}>Delete</Text>
                   </Pressable>
                 </View>
               </ScrollView>
