@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Dimensions,
   FlatList,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -9,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { useGetChatsQuery } from "../redux/chatApi";
-import { useState } from "react";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 const { width } = Dimensions.get("screen");
 
 function InboxScreen() {
@@ -18,6 +19,7 @@ function InboxScreen() {
   if (isLoading) {
     return <ActivityIndicator size="small" />;
   }
+  console.log(data);
 
   return (
     <View>
@@ -27,11 +29,40 @@ function InboxScreen() {
           return (
             <View style={styles.container}>
               <ScrollView
+                contentContainerStyle={{
+                  alignItems: "center",
+                  gap: 12,
+                }}
+                style={styles.scrollContainer}
                 horizontal
                 pagingEnabled
                 snapToOffsets={[width, width + 200]}
                 showsHorizontalScrollIndicator={false}
               >
+                {item.totalChatMembers > 2 && (
+                  <MaterialIcons name="groups" size={24} color="black" />
+                )}
+                {item.chatMembers.length === 2 &&
+                  item.chatMembers
+                    .filter((member) => member._id !== item.user._id)
+                    .map((member) =>
+                      member.userProfileImage ? (
+                        <Image
+                          style={styles.avatar}
+                          source={{
+                            uri: member.userProfileImage.imageSmallSource,
+                          }}
+                        />
+                      ) : (
+                        <Image
+                          style={styles.avatar}
+                          source={{
+                            uri: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+                          }}
+                        />
+                      )
+                    )}
+
                 <View style={{ width: width - 20 }}>
                   <Text>
                     {item.chatMembers.map((member) => member.name).join(", ")}
@@ -81,5 +112,10 @@ const styles = StyleSheet.create({
     width: width,
     padding: 10,
     paddingVertical: 23,
+  },
+  avatar: {
+    width: 45,
+    height: 45,
+    borderRadius: 50,
   },
 });
