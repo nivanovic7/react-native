@@ -4,7 +4,12 @@ const { width } = Dimensions.get("screen");
 function ImageSliderItem({ item, index }) {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: item.imageMediumSource }} style={styles.image} />
+      <Image
+        source={{
+          uri: item.imageMediumSource || "none",
+        }}
+        style={styles.image}
+      />
     </View>
   );
 }
