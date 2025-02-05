@@ -26,29 +26,27 @@ export default function HomeScreen() {
         tabBarLabel: () => null,
         tabBarStyle: {
           backgroundColor: "#201f2f",
-          margin: 10,
-          borderRadius: 24,
-          height: 70,
-          alignContent: "center",
-          justifyContent: "center",
+          margin: 15,
+          borderRadius: 30,
+          height: 66,
         },
         tabBarItemStyle: {
-          alignItems: "center",
-          justifyContent: "center",
           borderRadius: 8,
-          borderWidth: 3,
         },
+
         tabBarIconStyle: {
-          alignSelf: "center",
-          justifySelf: "center",
+          position: "absolute",
+          // alignSelf: "center",
+          // justifySelf: "center",
+          transform: "translateY(16px)",
         },
 
         tabBarIcon: ({ focused, color, size }) => {
-          if (route.name === "Feed") {
+          if (route.name === "FeedScreen") {
             return (
               <Ionicons name="home-outline" size={24} color="whitesmoke" />
             );
-          } else if (route.name === "Notifications") {
+          } else if (route.name === "NotificationsScreen") {
             return (
               <MaterialIcons
                 name="notifications-none"
@@ -57,9 +55,9 @@ export default function HomeScreen() {
                 style={{ alignContent: "center", justifyContent: "center" }}
               />
             );
-          } else if (route.name === "Search") {
+          } else if (route.name === "SearchScreen") {
             return <Octicons name="search" size={24} color="whitesmoke" />;
-          } else if (route.name === "Reels") {
+          } else if (route.name === "ReelsScreen") {
             return (
               <MaterialCommunityIcons
                 name="television-play"
@@ -67,7 +65,7 @@ export default function HomeScreen() {
                 color="whitesmoke"
               />
             );
-          } else if (route.name === "NewPost") {
+          } else if (route.name === "NewPostScreen") {
             return (
               <View style={styles.addButton}>
                 <Text style={{ color: "white" }}>+</Text>
@@ -93,10 +91,11 @@ const styles = StyleSheet.create({
   addButton: {
     width: 50,
     height: 50,
-    borderRadius: 100, // Circular container
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
     alignSelf: "center",
+    backgroundColor: "red",
   },
 });
