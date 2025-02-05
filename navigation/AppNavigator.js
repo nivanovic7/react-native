@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import InboxScreen from "../screens/InboxScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { StatusBar, StyleSheet, View } from "react-native";
+import ChatScreen from "../screens/ChatScreen";
 
 function AppNavigator() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -31,6 +32,7 @@ function AppNavigator() {
                 component={ProfileScreen}
                 options={{ title: "Profile", headerTitleAlign: "center" }}
               />
+              <Stack.Screen name="ChatScreen" component={ChatScreen} />
             </>
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />

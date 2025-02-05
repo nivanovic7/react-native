@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { useGetChatsQuery } from "../redux/chatApi";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Link } from "@react-navigation/native";
+import ChatScreen from "./ChatScreen";
 const { width } = Dimensions.get("screen");
 
 function InboxScreen() {
@@ -27,7 +29,7 @@ function InboxScreen() {
         data={data.data.filter((chat) => chat.chatMembers.length > 1)}
         renderItem={({ item }) => {
           return (
-            <View style={styles.container}>
+            <Link screen={ChatScreen} style={styles.container}>
               <ScrollView
                 contentContainerStyle={{
                   alignItems: "center",
@@ -75,7 +77,7 @@ function InboxScreen() {
                 <View style={{ flexDirection: "row" }}>
                   <Pressable
                     style={{
-                      width: (width - 20) / 2,
+                      width: 80,
                       justifyContent: "center",
                     }}
                   >
@@ -84,14 +86,14 @@ function InboxScreen() {
                   <Pressable
                     style={{
                       justifyContent: "center",
-                      width: (width - 20) / 2,
+                      width: 80,
                     }}
                   >
                     <Text style={{ textAlign: "center" }}>Delete</Text>
                   </Pressable>
                 </View>
               </ScrollView>
-            </View>
+            </Link>
           );
         }}
         ItemSeparatorComponent={() => (
