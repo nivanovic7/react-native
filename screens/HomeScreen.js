@@ -30,14 +30,7 @@ export default function HomeScreen() {
           height: 66,
           margin: 15,
           backgroundColor: "#201f2f",
-          // backgroundColor: "transparent",
-
           borderRadius: 24,
-          elevation: 0, // Shadow on Android
-          shadowColor: "#000", // Shadow color
-          shadowOffset: { width: 0, height: 0 }, // Shadow offset
-          shadowOpacity: 0, // Shadow opacity
-          shadowRadius: 0,
         },
         tabBarItemStyle: {
           borderRadius: 8,

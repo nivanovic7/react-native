@@ -31,5 +31,6 @@ export default Outfits;
 const styles = StyleSheet.create({
   container: {
     gap: 40,
+    paddingBottom: 170,
   },
 });

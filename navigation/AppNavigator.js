@@ -21,8 +21,16 @@ function AppNavigator() {
                 name="Home"
                 component={HomeScreen}
               />
-              <Stack.Screen name="InboxScreen" component={InboxScreen} />
-              <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+              <Stack.Screen
+                name="InboxScreen"
+                component={InboxScreen}
+                options={{ title: "Chats", headerTitleAlign: "center" }}
+              />
+              <Stack.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
+                options={{ title: "Profile", headerTitleAlign: "center" }}
+              />
             </>
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />
