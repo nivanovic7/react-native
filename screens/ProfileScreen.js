@@ -42,7 +42,7 @@ function ProfileScreen() {
           <Text style={styles.text}>Email</Text>
           <Text style={styles.text}>Realtionship status</Text>
         </View>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={[styles.text, styles.highlighted]}>
             {userFirstName || "n/a"}
           </Text>
@@ -92,23 +92,25 @@ export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
-    gap: 16,
+    gap: 40,
   },
   header: {
     alignItems: "center",
+    borderBottomWidth: 1,
+    padding: 40,
+    borderBottomColor: "lightgray",
+    gap: 20,
   },
   image: {
     width: 150,
     height: 150,
     borderRadius: 100,
-    margin: 18,
   },
 
   info: {
-    padding: 12,
+    paddingLeft: 12,
     gap: 20,
     flexDirection: "row",
-    backgroundColor: "red",
   },
   row: {
     flexDirection: "row",
@@ -118,6 +120,8 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomWidth: 1,
     borderColor: "transparent",
+    width: "100%",
+    alignSelf: "stretch",
   },
   highlighted: {
     fontWeight: "bold",
