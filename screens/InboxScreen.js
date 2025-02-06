@@ -1,24 +1,7 @@
-import {
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { ActivityIndicator, Dimensions, FlatList, View } from "react-native";
 import { useGetChatsQuery } from "../redux/chatApi";
-import { Link } from "@react-navigation/native";
-import ChatScreen from "./ChatScreen";
-import ChatAvatar from "../components/ChatAvatar";
-import ChatMembers from "../components/ChatMembers";
-import ChatButton from "../components/ChatButton";
 import SeparatorLine from "../components/SeparatorLine";
 import ChatItem from "../components/ChatItem";
-const { width } = Dimensions.get("screen");
 
 function InboxScreen() {
   const { data, isLoading } = useGetChatsQuery();

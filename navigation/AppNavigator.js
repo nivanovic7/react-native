@@ -7,12 +7,13 @@ import InboxScreen from "../screens/InboxScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import ChatScreen from "../screens/ChatScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function AppNavigator() {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.contrainer}>
+    <SafeAreaView style={styles.contrainer}>
       <NavigationContainer>
         <Stack.Navigator>
           {isLoggedIn ? (
@@ -32,14 +33,18 @@ function AppNavigator() {
                 component={ProfileScreen}
                 options={{ title: "Profile", headerTitleAlign: "center" }}
               />
-              <Stack.Screen name="ChatScreen" component={ChatScreen} />
+              <Stack.Screen
+                name="ChatScreen"
+                component={ChatScreen}
+                params={{ id: "sdfsfd" }}
+              />
             </>
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />
           )}
         </Stack.Navigator>
       </NavigationContainer>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -48,7 +53,6 @@ export default AppNavigator;
 const styles = StyleSheet.create({
   contrainer: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 50,
     backgroundColor: "whitesmoke",
   },
 });

@@ -1,15 +1,26 @@
-import { Link } from "@react-navigation/native";
-import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import ChatAvatar from "./ChatAvatar";
 import ChatMembers from "./ChatMembers";
 import ChatButton from "./ChatButton";
 import ChatScreen from "../screens/ChatScreen";
-
+import { useNavigation } from "@react-navigation/native";
 const { width } = Dimensions.get("screen");
 
 function ChatItem({ item }) {
+  const navigation = useNavigation();
   return (
-    <Link key={(item) => item._id} screen={ChatScreen} style={styles.container}>
+    <Pressable
+      key={item._id}
+      onPress={() => navigation.navigate("ChatScreen", { id: item._id })}
+      style={styles.container}
+    >
       <ScrollView
         contentContainerStyle={{
           alignItems: "center",
@@ -21,14 +32,21 @@ function ChatItem({ item }) {
         snapToOffsets={[width, width + 200]}
         showsHorizontalScrollIndicator={false}
       >
+        {item.chatMembers.length > 2 && (
+          <Image
+            style={styles.avatar}
+            source={require("../assets/groupAvatar.png")}
+          />
+        )}
         <ChatAvatar item={item} />
         <ChatMembers item={item} />
+
         <View style={styles.row}>
           <ChatButton text="Mute" />
           <ChatButton text="Delete" />
         </View>
       </ScrollView>
-    </Link>
+    </Pressable>
   );
 }
 
@@ -41,4 +59,9 @@ const styles = StyleSheet.create({
     paddingVertical: 23,
   },
   row: { flexDirection: "row" },
+  avatar: {
+    width: 35,
+    height: 35,
+    borderRadius: 50,
+  },
 });

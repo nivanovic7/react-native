@@ -1,12 +1,11 @@
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 
 const { width } = Dimensions.get("screen");
 
 function ChatMembers({ item }) {
   return (
-    <View style={{ width: width - 20 }}>
-      <Text>
-        {console.log(item)}
+    <View style={styles.container}>
+      <Text style={styles.text}>
         {item.chatMembers
           .filter((member) => member._id !== item.user._id)
           .map((member) => member.name)
@@ -17,3 +16,10 @@ function ChatMembers({ item }) {
 }
 
 export default ChatMembers;
+
+const styles = StyleSheet.create({
+  container: { width: width - 20 },
+  text: {
+    fontWeight: "bold",
+  },
+});
