@@ -1,22 +1,20 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useGetMessagesQuery } from "../redux/chatApi";
 import SingelMessage from "../components/SingelMessage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ChatScreenHeader from "../components/ChatScreenHeader";
 
 function ChatScreen({ route }) {
-  const [title, setTitle] = useState("Chat Screen");
   const navigation = useNavigation();
+  const { item: chat } = route.params;
+  const { data, isLoading } = useGetMessagesQuery(chat._id);
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => <ChatScreenHeader title={title} />,
+      header: () => <ChatScreenHeader chat={chat} />,
     });
-  }, [navigation, title]);
-
-  const { id } = route.params;
-  const { data, isLoading } = useGetMessagesQuery(id);
+  }, [navigation, data]);
 
   if (isLoading) return <ActivityIndicator size="small" />;
 
@@ -26,7 +24,7 @@ function ChatScreen({ route }) {
         {data.data
           .filter((msg) => msg.chatMessageText != null)
           .map((msg) => (
-            <SingelMessage msg={msg} />
+            <SingelMessage key={msg._id} msg={msg} />
           ))}
       </View>
     );

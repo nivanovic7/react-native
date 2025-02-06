@@ -18,7 +18,7 @@ function ChatItem({ item }) {
   return (
     <Pressable
       key={item._id}
-      onPress={() => navigation.navigate("ChatScreen", { id: item._id })}
+      onPress={() => navigation.navigate("ChatScreen", { item })}
       style={styles.container}
     >
       <ScrollView
