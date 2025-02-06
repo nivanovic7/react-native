@@ -31,5 +31,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 12,
     flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
 });
