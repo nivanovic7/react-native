@@ -1,80 +1,24 @@
-import axios from "axios";
-import { View, Text, StyleSheet } from "react-native";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Octicons from "@expo/vector-icons/Octicons";
-
-import { useDispatch, useSelector } from "react-redux";
+import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FeedScreen from "./FeedScreen";
 import SearchScreen from "./SearchScreen";
 import NewPostScreen from "./NewPostScreen";
 import ReelsScreen from "./ReelsScreen";
 import NotificationsScreen from "./NotificationsScreen";
+import { getTabIcons } from "../utils/helpers";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen() {
-  const dispatch = useDispatch();
-
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarLabel: () => null,
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 10,
-          height: 66,
-          margin: 15,
-          backgroundColor: "#201f2f",
-          borderRadius: 24,
-        },
-        tabBarItemStyle: {
-          borderRadius: 8,
-        },
-
-        tabBarIconStyle: {
-          position: "absolute",
-          transform: "translateY(16px)",
-        },
-
-        tabBarIcon: ({ focused, color, size }) => {
-          if (route.name === "FeedScreen") {
-            return (
-              <Ionicons name="home-outline" size={24} color="whitesmoke" />
-            );
-          } else if (route.name === "NotificationsScreen") {
-            return (
-              <MaterialIcons
-                name="notifications-none"
-                size={24}
-                color="whitesmoke"
-                style={{ alignContent: "center", justifyContent: "center" }}
-              />
-            );
-          } else if (route.name === "SearchScreen") {
-            return <Octicons name="search" size={24} color="whitesmoke" />;
-          } else if (route.name === "ReelsScreen") {
-            return (
-              <MaterialCommunityIcons
-                name="television-play"
-                size={24}
-                color="whitesmoke"
-              />
-            );
-          } else if (route.name === "NewPostScreen") {
-            return (
-              <View style={styles.addButton}>
-                <Text style={{ color: "white" }}>+</Text>
-              </View>
-            );
-          }
-        },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "blue",
+        tabBarStyle: styles.tabBar,
+        tabBarItemStyle: styles.tabBarItem,
+        tabBarIconStyle: styles.tabBarIcon,
+        tabBarIcon: () => getTabIcons(route),
       })}
     >
       <Tab.Screen name="FeedScreen" component={FeedScreen} />
@@ -87,15 +31,19 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center" },
-  addButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
-    alignSelf: "center",
-    backgroundColor: "red",
+  tabBar: {
+    position: "absolute",
+    bottom: 10,
+    height: 66,
+    margin: 15,
+    backgroundColor: "#201f2f",
+    borderRadius: 24,
+  },
+  tabBarItem: {
+    borderRadius: 8,
+  },
+  tabBarIcon: {
+    position: "absolute",
+    transform: "translateY(16px)",
   },
 });
