@@ -3,6 +3,7 @@ import { logOut } from "../redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProfileScreen() {
+  const dispatch = useDispatch();
   const {
     userProfileImg,
     user: {
@@ -14,13 +15,6 @@ function ProfileScreen() {
     },
   } = useSelector((state) => state.auth);
 
-  console.log(
-    userEmail,
-    userName,
-    userRelationshipStatus,
-    userLastName,
-    userFirstName
-  );
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -33,6 +27,8 @@ function ProfileScreen() {
           style={styles.button}
           title="Update profile image"
         />
+
+        <Button title="Logout" onPress={() => dispatch(logOut())} />
       </View>
       <View style={styles.info}>
         <View>
@@ -55,34 +51,6 @@ function ProfileScreen() {
             {userRelationshipStatus}
           </Text>
         </View>
-        {/* <View style={[styles.row]}>
-          <Text style={styles.text}> First Name:</Text>{" "}
-          <Text style={[styles.text, styles.highlighted]}>
-            {userFirstName || "n/a"}
-          </Text>
-        </View>
-        <View style={[styles.row]}>
-          <Text style={styles.text}> Last Name: </Text>{" "}
-          <Text style={[styles.text, styles.highlighted]}>
-            {userLastName || "n/a"}
-          </Text>
-        </View>
-        <View style={[styles.row]}>
-          <Text style={styles.text}> Email: </Text>{" "}
-          <Text style={[styles.text, styles.highlighted]}>{userEmail}</Text>
-        </View>
-        <View style={[styles.row]}>
-          <Text style={styles.text}> Relationship status: </Text>
-          <Text style={[styles.text, styles.highlighted]}>
-            {userRelationshipStatus}
-          </Text>
-        </View>
-        <View style={[styles.row]}>
-          <Text style={styles.text}> First Name: </Text>{" "}
-          <Text style={[styles.text, styles.highlighted]}>
-            {userFirstName || "n/a"}
-          </Text>
-        </View> */}
       </View>
     </View>
   );

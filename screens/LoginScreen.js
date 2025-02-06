@@ -1,28 +1,21 @@
-import axios from "axios";
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { logIn } from "../redux/authSlice";
-
-const API_URL = "https://laterz.api.exebyte.io/api/auth/login";
+import { useLoginMutation } from "../redux/authApi";
 
 function LoginScreen() {
+  const dispatch = useDispatch();
+  const [login] = useLoginMutation();
   const [password, setPassword] = useState("Password1!");
   const [email, setEmail] = useState("test@yahoo.com");
-  const dispatch = useDispatch();
-  function handleLogin() {
+
+  async function handleLogin() {
     if (!password || !email) {
       return;
     }
-
-    axios
-      .post(API_URL, {
-        userEmail: email,
-        userPassword: password,
-      })
-      .then((res) => {
-        dispatch(logIn(res.data.data));
-      });
+    const res = await login({ userEmail: email, userPassword: password });
+    dispatch(logIn(res.data.data));
   }
 
   return (

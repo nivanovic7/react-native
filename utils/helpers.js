@@ -9,7 +9,6 @@ import Octicons from "@expo/vector-icons/Octicons";
 import { StyleSheet, Text, View } from "react-native";
 
 export function getTabIcons(route) {
-  console.log(route.name);
   const iconMapping = {
     FeedScreen: <Ionicons name="home-outline" size={24} color="whitesmoke" />,
     NotificationsScreen: (
