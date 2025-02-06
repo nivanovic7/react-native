@@ -13,6 +13,7 @@ import { useGetChatsQuery } from "../redux/chatApi";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Link } from "@react-navigation/native";
 import ChatScreen from "./ChatScreen";
+import ChatAvatar from "../components/ChatAvatar";
 const { width } = Dimensions.get("screen");
 
 function InboxScreen() {
@@ -29,7 +30,11 @@ function InboxScreen() {
         data={data.data.filter((chat) => chat.chatMembers.length > 1)}
         renderItem={({ item }) => {
           return (
-            <Link screen={ChatScreen} style={styles.container}>
+            <Link
+              key={(item) => item._id}
+              screen={ChatScreen}
+              style={styles.container}
+            >
               <ScrollView
                 contentContainerStyle={{
                   alignItems: "center",
@@ -41,30 +46,8 @@ function InboxScreen() {
                 snapToOffsets={[width, width + 200]}
                 showsHorizontalScrollIndicator={false}
               >
-                {item.totalChatMembers > 2 && (
-                  <MaterialIcons name="groups" size={24} color="black" />
-                )}
-                {item.chatMembers.length === 2 &&
-                  item.chatMembers
-                    .filter((member) => member._id !== item.user._id)
-                    .map((member) =>
-                      member.userProfileImage ? (
-                        <Image
-                          style={styles.avatar}
-                          source={{
-                            uri: member.userProfileImage.imageSmallSource,
-                          }}
-                        />
-                      ) : (
-                        <Image
-                          style={styles.avatar}
-                          source={{
-                            uri: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
-                          }}
-                        />
-                      )
-                    )}
-
+                {item.chatMembers.length > 2 && <Text>GROUP</Text>}
+                <ChatAvatar item={item} />
                 <View style={{ width: width - 20 }}>
                   <Text>
                     {console.log(item)}
@@ -118,10 +101,5 @@ const styles = StyleSheet.create({
     width: width,
     padding: 10,
     paddingVertical: 23,
-  },
-  avatar: {
-    width: 45,
-    height: 45,
-    borderRadius: 50,
   },
 });

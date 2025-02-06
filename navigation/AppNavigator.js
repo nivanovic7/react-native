@@ -5,7 +5,7 @@ import LoginScreen from "../screens/LoginScreen";
 import { useSelector } from "react-redux";
 import InboxScreen from "../screens/InboxScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import ChatScreen from "../screens/ChatScreen";
 
 function AppNavigator() {
@@ -48,7 +48,7 @@ export default AppNavigator;
 const styles = StyleSheet.create({
   contrainer: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight + 10,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 50,
     backgroundColor: "whitesmoke",
   },
 });
