@@ -7,6 +7,7 @@ function ChatAvatar({ item }) {
       .filter((member) => member._id !== item.user._id)
       .map((member) => (
         <Image
+          key={item.user._id}
           style={styles.avatar}
           source={{
             uri: member.userProfileImage
