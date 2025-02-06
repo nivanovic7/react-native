@@ -5,9 +5,10 @@ import LoginScreen from "../screens/LoginScreen";
 import { useSelector } from "react-redux";
 import InboxScreen from "../screens/InboxScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
 import ChatScreen from "../screens/ChatScreen";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ChatScreenHeader from "../components/ChatScreenHeader";
 
 function AppNavigator() {
   const { isLoggedIn } = useSelector((state) => state.auth);
