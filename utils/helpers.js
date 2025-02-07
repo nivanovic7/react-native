@@ -2,6 +2,10 @@ export default function isTokenExpired(token) {
   const decoded = JSON.parse(atob(token.split(".")[1]));
   return decoded.exp * 1000 < Date.now();
 }
+
+export function getMembersWithoutCurrentUser(chat, currentUserId) {
+  return chat.chatMembers.filter((member) => member._id != currentUserId);
+}
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

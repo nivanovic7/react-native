@@ -1,25 +1,21 @@
-import { useNavigation } from "@react-navigation/native";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import PrivateChatHeader from "./PrivateChatHeader";
 import GroupChatHeader from "./GroupChatHeader";
+import BackButton from "./BackButton";
+import { getMembersWithoutCurrentUser } from "../utils/helpers";
 
 function ChatScreenHeader({ chat }) {
-  const navigation = useNavigation();
-  const currentUser = useSelector((state) => state.auth.user.sub);
-  const membersWithoutCurrentUser = chat.chatMembers.filter(
-    (member) => member._id != currentUser
-  );
+  const currentUserId = useSelector((state) => state.auth.user.sub);
+  const members = getMembersWithoutCurrentUser(chat, currentUserId);
 
   return (
     <View style={styles.container}>
-      <Pressable title="Back" onPress={() => navigation.goBack()}>
-        <Text>Back</Text>
-      </Pressable>
-      {membersWithoutCurrentUser.length === 1 ? (
-        <PrivateChatHeader members={membersWithoutCurrentUser} />
+      <BackButton />
+      {members.length === 1 ? (
+        <PrivateChatHeader members={members} />
       ) : (
-        <GroupChatHeader members={membersWithoutCurrentUser} />
+        <GroupChatHeader members={members} />
       )}
     </View>
   );
