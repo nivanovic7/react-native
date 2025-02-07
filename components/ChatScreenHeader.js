@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     padding: 12,
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: 16,
   },
 });

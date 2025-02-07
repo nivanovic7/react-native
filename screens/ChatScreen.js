@@ -1,9 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { useGetMessagesQuery } from "../redux/chatApi";
 import SingelMessage from "../components/SingelMessage";
 import { useEffect } from "react";
 import ChatScreenHeader from "../components/ChatScreenHeader";
+import SendMessage from "../components/SendMessage";
 
 function ChatScreen({ route }) {
   const navigation = useNavigation();
@@ -21,11 +29,19 @@ function ChatScreen({ route }) {
   if (data) {
     return (
       <View style={styles.container}>
-        {data.data
-          .filter((msg) => msg.chatMessageText != null)
-          .map((msg) => (
-            <SingelMessage key={msg._id} msg={msg} />
-          ))}
+        <ScrollView
+          contentContainerStyle={{
+            gap: 12,
+            flexGrow: 1,
+          }}
+        >
+          {data.data
+            .filter((msg) => msg.chatMessageText != null)
+            .map((msg) => (
+              <SingelMessage key={msg._id} msg={msg} />
+            ))}
+        </ScrollView>
+        <SendMessage />
       </View>
     );
   }
@@ -34,7 +50,11 @@ function ChatScreen({ route }) {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-  container: { gap: 12, padding: 12 },
+  container: {
+    gap: 12,
+    flex: 1,
+  },
+  messageContainer: {},
   messageText: {
     fontSize: 16,
   },

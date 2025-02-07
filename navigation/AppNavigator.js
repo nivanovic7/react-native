@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
   contrainer: {
     flex: 1,
     backgroundColor: "whitesmoke",
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: Platform.OS === "ios" && StatusBar.currentHeight,
   },
 });

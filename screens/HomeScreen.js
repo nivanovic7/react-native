@@ -5,7 +5,7 @@ import SearchScreen from "./SearchScreen";
 import NewPostScreen from "./NewPostScreen";
 import ReelsScreen from "./ReelsScreen";
 import NotificationsScreen from "./NotificationsScreen";
-import { getTabIcons } from "../utils/helpers";
+import TabIcons from "../components/TabIcons";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export default function HomeScreen() {
         tabBarStyle: styles.tabBar,
         tabBarItemStyle: styles.tabBarItem,
         tabBarIconStyle: styles.tabBarIcon,
-        tabBarIcon: () => getTabIcons(route),
+        tabBarIcon: () => TabIcons(route),
       })}
     >
       <Tab.Screen name="FeedScreen" component={FeedScreen} />
