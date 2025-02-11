@@ -43,13 +43,15 @@ function ChatScreen({ route }) {
             .map((msg) => {
               return <SingelMessage key={msg._id} msg={msg} />;
             })}
-          <NewMessages
-            setNewMessages={setNewMessages}
-            newMessages={newMessages}
-            chatId={chat._id}
-          />
+          {newMessages && (
+            <NewMessages
+              setNewMessages={setNewMessages}
+              newMessages={newMessages}
+              chatId={chat._id}
+            />
+          )}
         </ScrollView>
-        <SendMessage chatId={chat._id} />
+        <SendMessage setNewMessages={setNewMessages} chatId={chat._id} />
       </View>
     );
   }

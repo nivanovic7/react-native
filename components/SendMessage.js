@@ -2,16 +2,27 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import { useSendMessageMutation } from "../redux/chatApi";
+import { useSelector } from "react-redux";
 
-function SendMessage({ chatId }) {
+function SendMessage({ chatId, setNewMessages }) {
   const [message, setMessage] = useState("");
   const [sendMessage] = useSendMessageMutation();
+  const currentUserId = useSelector((state) => state.auth.user.sub);
 
   async function handleMessage() {
     if (!message) return;
+    setNewMessages((state) => [
+      ...state,
+      {
+        payload: {
+          _id: new Date().getTime(),
+          chatMessageText: message,
+          chatMessageUser: { _id: currentUserId },
+        },
+      },
+    ]);
     setMessage("");
-    const res = await sendMessage({ message, chatId });
-    console.log(res);
+    await sendMessage({ message, chatId });
   }
 
   return (

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function SingelMessage({ msg }) {
   const { sub: userId } = useSelector((state) => state.auth.user);
-
+  console.log(msg);
   return (
     <View
       key={msg._id}

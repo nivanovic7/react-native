@@ -8,7 +8,6 @@ function NewPostScreen() {
   const [file, setFile] = useState(null);
   let formData = new FormData();
   const [createOutfit] = useCreateOutfitMutation();
-  console.log("sdg");
   const pickImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {

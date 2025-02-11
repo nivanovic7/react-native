@@ -22,12 +22,14 @@ function NewMessages({ setNewMessages, newMessages, chatId }) {
       };
     }
   }, [chatId, socket, currentUserId, setNewMessages]);
+  console.log(newMessages);
   return (
     <View style={styles.container}>
       {newMessages &&
-        newMessages.map((msg) => (
-          <SingelMessage key={msg.payload._id} msg={msg.payload} />
-        ))}
+        newMessages.map((msg) => {
+          console.log(msg);
+          return <SingelMessage key={msg.payload._id} msg={msg.payload} />;
+        })}
     </View>
   );
 }
