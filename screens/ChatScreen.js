@@ -2,12 +2,14 @@ import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import { useGetMessagesQuery } from "../redux/chatApi";
 import SingelMessage from "../components/SingelMessage";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatScreenHeader from "../components/ChatScreenHeader";
 import SendMessage from "../components/SendMessage";
+import NewMessages from "../components/NewMessages";
 
 function ChatScreen({ route }) {
   const navigation = useNavigation();
+  const [newMessages, setNewMessages] = useState([]);
   const { item: chat } = route.params;
   const { data, isLoading } = useGetMessagesQuery(chat._id);
   const messageBoxRef = useRef(null);
@@ -41,7 +43,11 @@ function ChatScreen({ route }) {
             .map((msg) => {
               return <SingelMessage key={msg._id} msg={msg} />;
             })}
-          <View></View>
+          <NewMessages
+            setNewMessages={setNewMessages}
+            newMessages={newMessages}
+            chatId={chat._id}
+          />
         </ScrollView>
         <SendMessage chatId={chat._id} />
       </View>
@@ -55,7 +61,6 @@ const styles = StyleSheet.create({
   container: {
     gap: 12,
     flex: 1,
-    paddingHorizontal: 8,
   },
   messageContainer: {},
   messageText: {

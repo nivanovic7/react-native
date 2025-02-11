@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: "row",
     gap: 20,
-    elevation: 10,
+    elevation: 5,
+    marginHorizontal: 12,
   },
   userMessage: {
     backgroundColor: "darkorange",
