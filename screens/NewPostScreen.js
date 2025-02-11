@@ -1,43 +1,52 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
-
-import { PermissionsAndroid } from "react-native";
+import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { useCreateOutfitMutation } from "../redux/outfitsApi";
 
 function NewPostScreen() {
-  const [photo, setPhoto] = useState(null);
-
-  const requestPermissions = async () => {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
-    );
-    return granted === PermissionsAndroid.RESULTS.GRANTED;
-  };
-
-  const handleChoosePhoto = async () => {
-    const hasPermission = await requestPermissions();
-    if (!hasPermission) {
-      alert("DENIED");
-      return;
-    }
-    alert("ACC OK");
-    launchImageLibrary({ mediaType: "photo" }, (response) => {
-      console.log("HEJJJJJJJ");
-      if (response.assets && response.assets.length > 0) {
-        setPhoto(response.assets[0].uri);
+  const [desc, setDesc] = useState("");
+  const [file, setFile] = useState(null);
+  let formData = new FormData();
+  const [createOutfit] = useCreateOutfitMutation();
+  console.log("sdg");
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Permission Denied");
+    } else {
+      const result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.canceled) {
+        setFile(result);
       }
-    });
+    }
   };
+
+  function handleSubmit() {
+    console.log(file);
+    formData.append("outfitsDescription", desc);
+    formData.append("outfitsImages", file.assets[0]);
+    formData.append("likeSetting", "true");
+    formData.append("longitude", "17.23434");
+    formData.append("latitude", "47.21335");
+    formData.append("commentSettings", "true");
+
+    console.log(formData);
+    createOutfit(formData);
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>new pddost</Text>
       <TextInput
+        value={desc}
+        onChangeText={setDesc}
         multiline={true}
         style={styles.input}
         placeholder="Post description"
       />
-      <Button title="Add image" onPress={handleChoosePhoto} />
+      <Button title="Add image" onPress={pickImage} />
+      <Button disabled={!file} title="Submit" onPress={handleSubmit} />
+      <Image source={{ uri: file?.assets[0]?.uri }} width={55} height={55} />
     </View>
   );
 }
