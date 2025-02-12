@@ -6,13 +6,19 @@ import { useEffect, useRef, useState } from "react";
 import ChatScreenHeader from "../components/ChatScreenHeader";
 import SendMessage from "../components/SendMessage";
 import NewMessages from "../components/NewMessages";
+import useKeyboardStatus from "../hooks/useKeyboardStatus";
 
 function ChatScreen({ route }) {
+  const messageBoxRef = useRef(null);
   const navigation = useNavigation();
   const [newMessages, setNewMessages] = useState([]);
+  const isKeyboardOpen = useKeyboardStatus();
   const { item: chat } = route.params;
   const { data, isLoading } = useGetMessagesQuery(chat._id);
-  const messageBoxRef = useRef(null);
+
+  useEffect(() => {
+    messageBoxRef.current?.scrollToEnd({ animated: true });
+  }, [isKeyboardOpen]);
 
   useEffect(() => {
     navigation.setOptions({
