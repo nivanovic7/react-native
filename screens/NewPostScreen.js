@@ -35,7 +35,7 @@ function NewPostScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>new pddost</Text>
+      <Text style={styles.header}>new post</Text>
       <TextInput
         value={desc}
         onChangeText={setDesc}

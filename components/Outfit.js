@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import UserSnippet from "./UserSnippet";
 import Entypo from "@expo/vector-icons/Entypo";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -6,12 +13,15 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import ImageSlider from "./ImageSlider";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import Comments from "./Comments";
 
 function Outfit({ outfit }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { imageSmallSource } = useSelector(
     (state) => state.auth.userProfileImg
   );
-
+  console.log(outfit);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -25,7 +35,9 @@ function Outfit({ outfit }) {
           <Text>{outfit.likes}</Text>
         </View>
         <View style={[styles.row, { marginRight: "auto" }]}>
-          <FontAwesome5 name="comment" size={24} color="black" />
+          <Pressable onPress={() => setIsModalOpen(true)}>
+            <FontAwesome5 name="comment" size={24} color="black" />
+          </Pressable>
           <Text>{outfit.outfitPostComment.length}</Text>
         </View>
 
@@ -40,6 +52,11 @@ function Outfit({ outfit }) {
         <TextInput placeholder="Add comment..." />
       </View>
       <Text style={styles.created}>{outfit.created}</Text>
+      <Comments
+        comments={outfit.outfitPostComment}
+        isModalOpen={isModalOpen}
+        onCloseModal={() => setIsModalOpen(false)}
+      />
     </View>
   );
 }
