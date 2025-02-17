@@ -8,10 +8,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     getOutfits: builder.query({
       query: () => ({
         url: OUTFITS_URL,
-        body: {
-          offset: 2,
-          limit: 2,
-        },
       }),
     }),
     createOutfit: builder.mutation({
