@@ -11,7 +11,7 @@ import Outfit from "./Outfit";
 
 function Outfits() {
   const { data, isLoading, error } = useGetOutfitsQuery();
-
+  console.log(data);
   if (error) return <Text>Error ocured, try again later!</Text>;
 
   return isLoading ? (

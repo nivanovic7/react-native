@@ -5,7 +5,7 @@ function UserSnippet({ user }) {
     <View style={styles.container}>
       <Image
         style={styles.avatar}
-        source={{ uri: user.avatar.imageSmallSource }}
+        source={{ uri: user?.avatar?.imageSmallSource }}
       />
       <View>
         <Text style={styles.name}>{user.name}</Text>

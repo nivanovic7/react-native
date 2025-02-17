@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import FeedHeader from "../components/FeedHeader";
 import Outfits from "../components/Outfits";
 

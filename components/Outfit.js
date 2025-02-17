@@ -15,13 +15,16 @@ import ImageSlider from "./ImageSlider";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Comments from "./Comments";
+import { useCreateCommentMutation } from "../redux/outfitsApi";
 
 function Outfit({ outfit }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comment, setComment] = useState("");
   const { imageSmallSource } = useSelector(
     (state) => state.auth.userProfileImg
   );
-  console.log(outfit);
+  const [createComment] = useCreateCommentMutation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -49,7 +52,12 @@ function Outfit({ outfit }) {
           source={{ uri: imageSmallSource }}
           style={{ width: 35, height: 35, borderRadius: 50 }}
         />
-        <TextInput placeholder="Add comment..." />
+        <TextInput
+          placeholder="Add comment..."
+          value={comment}
+          onChangeText={setComment}
+          onSubmitEditing={() => createComment({ postId: outfit._id, comment })}
+        />
       </View>
       <Text style={styles.created}>{outfit.created}</Text>
       <Comments

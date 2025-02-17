@@ -1,36 +1,54 @@
-import { useState } from "react";
-import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { use, useState } from "react";
+import {
+  Button,
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { useCreateOutfitMutation } from "../redux/outfitsApi";
-
 function NewPostScreen() {
   const [desc, setDesc] = useState("");
-  const [file, setFile] = useState(null);
+  const [photo, setPhoto] = useState();
+
   let formData = new FormData();
   const [createOutfit] = useCreateOutfitMutation();
-  const pickImage = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert("Permission Denied");
-    } else {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.canceled) {
-        setFile(result);
-      }
-    }
-  };
 
-  function handleSubmit() {
-    console.log(file);
+  async function handleSubmit() {
+    console.log(photo);
     formData.append("outfitsDescription", desc);
-    formData.append("outfitsImages", file.assets[0]);
+    formData.append("outfitsImages", photo);
     formData.append("likeSetting", "true");
     formData.append("longitude", "17.23434");
     formData.append("latitude", "47.21335");
     formData.append("commentSettings", "true");
-
     console.log(formData);
-    createOutfit(formData);
+    const res = await createOutfit(formData);
+    console.log(res);
+  }
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: "images", //
+      allowsEditing: false,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const res = await uriToFile(result.assets[0].uri, "image.jpg");
+      setPhoto(result);
+    }
+  };
+
+  async function uriToFile(uri, fileName) {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return new File([blob], fileName, { type: blob.type });
   }
 
   return (
@@ -44,8 +62,8 @@ function NewPostScreen() {
         placeholder="Post description"
       />
       <Button title="Add image" onPress={pickImage} />
-      <Button disabled={!file} title="Submit" onPress={handleSubmit} />
-      <Image source={{ uri: file?.assets[0]?.uri }} width={55} height={55} />
+      <Button disabled={!photo} title="Submit" onPress={handleSubmit} />
+      {/* <Image source={{ uri: photo[0]?._data.uri }} width={55} height={55} /> */}
     </View>
   );
 }

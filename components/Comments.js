@@ -4,12 +4,12 @@ function Comments({ comments, onCloseModal, isModalOpen }) {
   return (
     <Modal animationType="slide" visible={isModalOpen} transparent={true}>
       <View style={styles.container}>
-        <Text>Close</Text>
-
-        {comments.map((comment) => (
-          <Text key={comment._id}>{comment.outfitPostComment}</Text>
-        ))}
-        <Pressable onPress={onCloseModal}></Pressable>
+        <Pressable onPress={onCloseModal}>
+          <Text>Close</Text>
+        </Pressable>
+        {comments.map((comment) => {
+          return <Text key={comment._id}>{comment.outfitPostComment}</Text>;
+        })}
       </View>
     </Modal>
   );
