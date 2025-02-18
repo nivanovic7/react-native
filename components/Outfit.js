@@ -61,7 +61,7 @@ function Outfit({ outfit }) {
       </View>
       <Text style={styles.created}>{outfit.created}</Text>
       <Comments
-        comments={outfit.outfitPostComment}
+        comment={outfit.outfitPostComment}
         isModalOpen={isModalOpen}
         onCloseModal={() => setIsModalOpen(false)}
       />
