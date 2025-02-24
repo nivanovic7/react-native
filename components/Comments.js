@@ -1,7 +1,6 @@
 import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
 function Comments({ comment, onCloseModal, isModalOpen }) {
-  console.log(comment);
   return (
     <Modal animationType="slide" visible={isModalOpen} transparent={true}>
       <View style={styles.container}>
@@ -10,9 +9,9 @@ function Comments({ comment, onCloseModal, isModalOpen }) {
         </Pressable>
         {comment.length &&
           comment.map((comment) => {
-            console.log(comment.user[0].avatar.imageSmallSource);
+            console.log(comment);
             return (
-              <View style={styles.comment} key={comment._key}>
+              <View style={styles.comment} key={comment._id}>
                 <Image
                   style={styles.avatar}
                   width={45}

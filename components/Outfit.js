@@ -32,6 +32,12 @@ function Outfit({ outfit }) {
         <Entypo name="dots-three-horizontal" size={18} color="black" />
       </View>
       <ImageSlider data={outfit.outfitImages} />
+      <View style={styles.pagination}>
+        {outfit.outfitImages.length > 1 &&
+          outfit.outfitImages.map((img) => (
+            <View key={img._id} style={styles.dot}></View>
+          ))}
+      </View>
       <View style={styles.interactionButtons}>
         <View style={styles.row}>
           <AntDesign name="hearto" size={24} color="black" />
@@ -81,6 +87,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 12,
+  },
+
+  pagination: {
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+    flexDirection: "row",
+  },
+
+  dot: {
+    width: 12,
+    height: 12,
+    backgroundColor: "lightgray",
+    borderRadius: 50,
   },
   interactionButtons: {
     flexDirection: "row",
